@@ -1,0 +1,60 @@
+<div class="card" style="background:#dc3545;color:white">
+    <div class="card-header" style="text-align: center;">Shopping Cart</div>
+    <div class="card-body">
+      <p>Total: {{total | currency}}</p>
+      <p>Items bought:</p>
+      <ul>
+        <li *ngFor="let cart of listCart ; let i = index">{{cart.name}}-Số lượng:{{cart.quantity}}</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <button  [disabled]="listCart.length==0" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">View Cart</button>
+    </div>
+</div>
+ <!-- The Modal -->
+ <div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Giỏ hàng</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Số lượng</th>
+              <th>Tên mặt hàng</th>
+              <th>Giá</th>
+              <th>Thành tiền</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cart of listCart ; let i = index">
+              <td><input min="1" max="100" style="width:50px;" type="number"#box
+                [value]="cart.quantity"
+                (change)="updateQuantity(cart,
+                box.value)"></td>
+              <td>{{cart.name}}</td>
+              <td>{{cart.price| currency}}</td>
+              <td>{{(cart.quantity*cart.price )| currency}}</td>
+              <td><button class="btn btn-secondary" (click) = "removeFromCart(i)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <div><h4 id="total">Total: {{total | currency}}</h4></div>
+        <button type="button" [disabled]="listCart.length==0" class="btn btn-danger" data-dismiss="modal"  (click)="navigateToOrder()">Check Out</button>
+      </div>
+      
+    </div>
+  </div>
+</div>

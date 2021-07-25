@@ -1,0 +1,32 @@
+<div class="container mt-3">
+    <h2>Trang Admin</h2>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu1">Quản lý sản phẩm </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu2">Quản lý đơn hàng</a>
+      </li>
+    </ul>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="home" class="container tab-pane active"><br>
+        <h3>HOME</h3>
+        <p> Chào mừng bạn đến với trang Admin...</p>
+      </div>
+      <div id="menu1" class="container tab-pane fade"><br>
+        <h3>Quản lý sản phẩm</h3>
+        <app-product></app-product>
+      </div>
+      <div id="menu2" class="container tab-pane fade"><br>
+        <h3>Quản lý đơn hàng</h3>
+        <app-order></app-order>
+      </div>
+    </div>
+  </div>

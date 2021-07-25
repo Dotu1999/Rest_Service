@@ -1,0 +1,70 @@
+<button id="add" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary"
+(click)="setStatus(0);name.value='';picture.value='';price.value='';">Thêm Sản Phẩm</button>
+<div></div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Ảnh mô tả</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Giá</th>
+            <th>Update</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products ; let i = index">
+            <td>{{i}}</td>
+            <td>
+                <img src="{{product.picture}}"
+                    alt="ảnh hoa quả">
+            </td>
+            <td>{{product.name}}</td>
+            <td>{{product.price|currency}}</td>
+            <td><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-secondary"
+                (click)="setStatus(1);getProductbyId(product.id)">Edit</button>
+            </td>
+            <td><button type="button" class="btn btn-secondary" (click)="deleteProduct(product.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<!-- The Modal -->
+<!-- <form> -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin sản phẩm </h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" class="form-control"  #id value="{{product1.id}}" >
+                <div class="form-group">
+                    <label for="usr">Tên sản phẩm:</label>
+                    <input type="text" class="form-control" #name value="{{product1.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="usr">Ảnh:</label>
+                    <input type="text" class="form-control"  #picture value="{{product1.picture}}" >
+                </div>
+                <div class="form-group">
+                    <label for="usr">Giá:</label>
+                    <input type="number" class="form-control" #price value="{{product1.price}}">
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" *ngIf="status==0;" class="btn btn-danger" data-dismiss="modal" (click)="addProduct(name.value,picture.value,price.value);
+                name.value='';picture.value='';price.value='';">Thêm</button>
+                <button type="button" *ngIf="status==1" class="btn btn-danger" data-dismiss="modal" (click)="updateProduct(id.value,name.value,picture.value,price.value);">Sửa</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- </form> -->

@@ -1,0 +1,11 @@
+#quantity {
+    width: 60px;
+    margin-right: 10px;
+    display: inline;
+  }
+  .no_add {
+    background-color: #7c9cbe;
+    cursor: no-drop !important;
+    pointer-events: none !important;
+  }
+  
