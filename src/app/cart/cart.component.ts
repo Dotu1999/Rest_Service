@@ -27,11 +27,11 @@ export class CartComponent implements OnInit {
   getTotal() {
     this.total = 0;
     this.listCart.forEach(element => {
-      this.total += element.price * element.quantity;
+      this.total += element.product.price * element.quantity;
     });
   }
   removeFromCart(id: number) {
-    let indexOfStevie = this.listCart.findIndex(i => i.id == id);
+    let indexOfStevie = this.listCart.findIndex(i => i.product.id == id);
     this.listCart.splice(indexOfStevie, 1);
     this.getTotal();
   }

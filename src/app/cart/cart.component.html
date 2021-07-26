@@ -4,7 +4,7 @@
       <p>Total: {{total | currency}}</p>
       <p>Items bought:</p>
       <ul>
-        <li *ngFor="let cart of listCart ; let i = index">{{cart.name}}-Số lượng:{{cart.quantity}}</li>
+        <li *ngFor="let cart of listCart ; let i = index">{{cart.product.name}}-Số lượng:{{cart.quantity}}</li>
       </ul>
     </div>
     <div class="card-footer">
@@ -40,9 +40,9 @@
                 [value]="cart.quantity"
                 (change)="updateQuantity(cart,
                 box.value)"></td>
-              <td>{{cart.name}}</td>
-              <td>{{cart.price| currency}}</td>
-              <td>{{(cart.quantity*cart.price )| currency}}</td>
+              <td>{{cart.product.name}}</td>
+              <td>{{cart.product.price| currency}}</td>
+              <td>{{(cart.quantity*cart.product.price )| currency}}</td>
               <td><button class="btn btn-secondary" (click) = "removeFromCart(i)">Delete</button></td>
             </tr>
           </tbody>

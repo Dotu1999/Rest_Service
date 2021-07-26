@@ -3,5 +3,8 @@ import { Product } from './Product'
 export class LineItems {
     productId!:number;
     quantity!: number;
+    product!:Product;
+    orderId!:number;
+    lineNumber!:number;
 }
   

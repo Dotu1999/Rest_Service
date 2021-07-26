@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OrderService } from '../../order.service';
 import { Order } from '../../model/Order';
 import { LineItems } from 'src/app/model/LineItems';
+import { Product } from 'src/app/model/Product';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -25,12 +26,17 @@ export class OrderComponent implements OnInit {
       }
     );
   }
-  order!:Order;
-  items:LineItems[]=[];
+  // products:Product[]=[];
+  items!:LineItems[];
+  sum:number=0;
   getOrderDetail(id:number){
     this.OrderService.getOrderDetail(id).subscribe(
       data => {
         this.items = data.lineItems;
+        console.log(this.items);
+        this.items.forEach(e=>{
+          this.sum += e.product.price*e.quantity;
+        })
       },
       err => {
         console.log(err);

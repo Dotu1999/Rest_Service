@@ -8,7 +8,7 @@ export class Order {
     orderDate: String='';
     shippeddate:String='';
     isShipped:boolean=true;
-    LineItems!:LineItems[];
+    lineItems!:LineItems[];
     
   }
   

@@ -7,7 +7,6 @@
             <th>Address</th>
             <th>Order Date</th>
             <th>Shipped Date</th>
-            <th>Is Shipped</th>
             <th>Chi Tiết Đơn Hàng</th>
             <th>Update</th>
             <th>Remove</th>
@@ -21,7 +20,6 @@
             <td>{{order.address}}</td>
             <td>{{order.orderDate}}</td>
             <td>{{order.shippeddate}}</td>
-            <td>{{order.isShipped}}</td>
             <td><button type="button" class="btn btn-secondary"  data-toggle="modal" data-target="#myModal1" (click)="getOrderDetail(order.id)">Chi tiết</button></td>
             <td><button type="button" class="btn btn-secondary">Edit</button></td>
             <td><button type="button" class="btn btn-secondary">Delete</button></td>
@@ -53,29 +51,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td *ngFor="let item of items ; let i = index">
-                            <img src="item.product.picture"
-                    alt="ảnh hoa quả">
-                        </td>
-                        <td>fsd</td>
-                        <td>john@example.com</td>
-                        <td>233$</td>
-                        <td>142$</td>
-                      </tr>
-                      <tr>
+                      <tr *ngFor="let item of items ; let i = index">
                         <td>
-                            <img src="https://img2.thuthuatphanmem.vn/uploads/2019/03/14/anh-cuc-dep-cua-qua-tao_095349241.jpg"
+                            <img src="{{item.product.picture}}"
                     alt="ảnh hoa quả">
                         </td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>233$</td>
-                        <td>142$</td>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.product.price|currency}}</td>
+                        <td>{{ item.product.price*item.quantity|currency }}</td>
                       </tr>
                       <tr>
-                          <td colspan="4">Tổng Tiền :</td>
-                          <td>576$</td>
+                          <td colspan="4">Total:</td>
+                          <td>{{sum|currency}}</td>
                       </tr>
                     </tbody>
                   </table>

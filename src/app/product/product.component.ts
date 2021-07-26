@@ -21,9 +21,8 @@ export class ProductComponent implements OnInit {
   addCart(product: Product, index: number) {
     this.listCart.push(
       new Cart(
+        product,
         product.id,
-        product.name,
-        product.price,
         this.quantity[index]
       )
     );
@@ -31,11 +30,11 @@ export class ProductComponent implements OnInit {
     this.ProductService.ProductDataSource$.next(this.listCart);
   }
   checkCart(i: number): number {
-    return this.listCart.filter(ListCart => ListCart.id == i).length;
+    return this.listCart.filter(ListCart => ListCart.product.id == i).length;
     // return 1;
   }
   removeFromCart(id: number) {
-    let indexOfStevie = this.listCart.findIndex(i => i.id == id);
+    let indexOfStevie = this.listCart.findIndex(i => i.product.id == id);
     this.listCart.splice(indexOfStevie, 1);
     this.ProductService.ProductDataSource$.next(this.listCart);
   }

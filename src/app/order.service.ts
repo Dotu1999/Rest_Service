@@ -22,4 +22,7 @@ export class OrderService {
       catchError(error=>([]))
     );
   }
+  public addOrder(order:Order): Observable<any> {
+    return this.http.post(this.baseURL + `orders`,order);
+  }
 }
