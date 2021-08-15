@@ -18,8 +18,11 @@ export class ProductService {
       catchError(error=>([]))
     );
   }
-  public addProduct(product: Product): Observable<any> {
-    return this.http.post<any>(this.baseURL+'products',product);
+  public addProduct(formData:FormData): Observable<any> {
+    // return this.http.post<any>(this.baseURL+'products',);
+    return this.http.post(this.baseURL+'products', formData)
+      // .map(() => { return true; })
+      // .catch((e) => this.handleError(e));
   }
   public getProductById(id:number): Observable<any> {
     return this.http.get(this.baseURL + `products/${id}`).pipe(
@@ -27,15 +30,10 @@ export class ProductService {
       // catchError(error=>console.log("looix"))
     );
   }
-  public updateProduct(product2:Product): Observable<any> {
+  public updateProduct(id:String,data:FormData): Observable<any> {
     // const product2 :Product = new Product();
-    const httpOptions={
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    return this.http.put<any>(this.baseURL + `products/${product2.id}`,product2,httpOptions).pipe(
-      tap(selectedProduct=>console.log(`selectedProduct=${JSON.stringify(selectedProduct)}`)),
-      // catchError(error=>console.log("looix"))
-    );
+    // const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.put(this.baseURL + `products/${id}`,data,{responseType: 'text'});
   }
   public deleteProduct(id:number): Observable<any> {
     return this.http.delete<any>(this.baseURL+`products/${id}`);

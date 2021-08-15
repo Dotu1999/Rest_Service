@@ -11,10 +11,11 @@ export class OrderService {
   baseURL:string = "http://localhost:8080/";
   constructor(private http: HttpClient) { }
   public getOrder(): Observable<any> {
-    return this.http.get(this.baseURL + 'orders').pipe(
-      tap(receivedProduct=>console.log(`receivedProduct=${JSON.stringify(receivedProduct)}`)),
-      catchError(error=>([]))
-    );
+    return this.http.get(this.baseURL + 'orders');
+    // .pipe(
+    //   tap(receivedProduct=>console.log(`receivedProduct=${JSON.stringify(receivedProduct)}`)),
+    //   catchError(error=>([]))
+    // );
   }
   public getOrderDetail(id:number): Observable<any> {
     return this.http.get(this.baseURL + `orders/${id}`).pipe(

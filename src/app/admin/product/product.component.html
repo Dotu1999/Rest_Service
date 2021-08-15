@@ -1,5 +1,5 @@
 <button id="add" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary"
-(click)="setStatus(0);name.value='';picture.value='';price.value='';">Thêm Sản Phẩm</button>
+(click)="setStatus(0);name.value='';picture.value='';price.value='';fileToUpload=null">Thêm Sản Phẩm</button>
 <div></div>
 <table class="table table-bordered">
     <thead>
@@ -16,13 +16,13 @@
         <tr *ngFor="let product of products ; let i = index">
             <td>{{i}}</td>
             <td>
-                <img src="{{product.picture}}"
+                <img id="picture{{i}}" src="http://localhost:8080/getimage/{{products[i].picture}}"
                     alt="ảnh hoa quả">
             </td>
-            <td>{{product.name}}</td>
-            <td>{{product.price|currency}}</td>
+            <td>{{products[i].name}}</td>
+            <td>{{products[i].price|currency}}</td>
             <td><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-secondary"
-                (click)="setStatus(1);getProductbyId(product.id)">Edit</button>
+                (click)="setStatus(1);getProductbyId(product.id);picture.value=''">Edit</button>
             </td>
             <td><button type="button" class="btn btn-secondary" (click)="deleteProduct(product.id)">Delete</button></td>
         </tr>
@@ -48,8 +48,8 @@
                     <input type="text" class="form-control" #name value="{{product1.name}}">
                 </div>
                 <div class="form-group">
-                    <label for="usr">Ảnh:</label>
-                    <input type="text" class="form-control"  #picture value="{{product1.picture}}" >
+                    <label for="usr">Ảnh:</label><br>
+                    <input type="file" id="file" #picture value="{{product1.picture}}" (change)="selectFile($event)">
                 </div>
                 <div class="form-group">
                     <label for="usr">Giá:</label>
@@ -59,9 +59,9 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" *ngIf="status==0;" class="btn btn-danger" data-dismiss="modal" (click)="addProduct(name.value,picture.value,price.value);
+                <button type="button" *ngIf="status==0;" class="btn btn-danger" data-dismiss="modal" (click)="addProduct(name.value,price.value);
                 name.value='';picture.value='';price.value='';">Thêm</button>
-                <button type="button" *ngIf="status==1" class="btn btn-danger" data-dismiss="modal" (click)="updateProduct(id.value,name.value,picture.value,price.value);">Sửa</button>
+                <button type="button" *ngIf="status==1" class="btn btn-danger" data-dismiss="modal" (click)="updateProduct(id.value,name.value,price.value);">Sửa</button>
             </div>
 
         </div>

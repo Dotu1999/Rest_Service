@@ -15,17 +15,28 @@ export class ProductComponent implements OnInit {
   }
   product1:Product=new Product();
   status:number=0;
+  //upload file
+  fileToUpload!: File|null;
+  selectFile(event: any): void {
+    // const target = event.target as HTMLInputElement;
+    // const files = target.files as FileList;
+    // console.log(files.item(0));
+    this.fileToUpload = event.target.files.item(0);
+    console.log(this.fileToUpload);
+  }
   setStatus(i:number)
   {
     this.status =i;
   }
-  addProduct(name:string,picture:string,price:string):void
+  addProduct(name:string,price:string):void
   {
-    const new_product:Product = new Product()
-    new_product.name=name;
-    new_product.picture=picture;
-    new_product.price=Number(price);
-    this.ProductService.addProduct(new_product).subscribe(
+    console.log(this.fileToUpload);
+    let formData: FormData = new FormData();
+    formData.append('name', name);
+    formData.append('price', price);
+    if(this.fileToUpload!=null)
+    {formData.append('image', this.fileToUpload);}
+    this.ProductService.addProduct(formData).subscribe(
       insertProduct=>{this.products.push(insertProduct);});
   }
   getProduct() {
@@ -41,23 +52,29 @@ export class ProductComponent implements OnInit {
   getProductbyId(id:number){
       this.ProductService.getProductById(id).subscribe(product=>
         {this.product1=product;});
+        this.fileToUpload = null;
+        console.log(this.fileToUpload);
   }
-  updateProduct(id:string,name:string,picture:string,price:string)
+  updateProduct(id:string,name:string,price:string)
   {
-    const updateProduct:Product = new Product();
-    updateProduct.id=Number(id);
-    updateProduct.name=name;
-    updateProduct.picture=picture;
-    updateProduct.price=Number(price);
-    this.ProductService.updateProduct(updateProduct).subscribe(product=>
+    let formData: FormData = new FormData();
+    formData.append('name', name);
+    formData.append('price', price);
+    if(this.fileToUpload!=null)
+    {
+      formData.append('image', this.fileToUpload);
+    }
+    // formData.append('image', this.fileToUpload);
+    this.ProductService.updateProduct(id,formData).subscribe(res=>
       {
-        const idpro:number=product.id
-        let indexOfStevie = this.products.findIndex(i => i.id == idpro);
-        this.products[indexOfStevie].name=product.name;
-        this.products[indexOfStevie].picture=product.picture;
-        this.products[indexOfStevie].price=product.price;
+        let idProduct:number = Number(id);
+        let indexOfStevie = this.products.findIndex(i => i.id == idProduct);
+        this.products[indexOfStevie].name=name;
+        let date:String = "?timestamp=" + new Date().getTime();
+        this.products[indexOfStevie].picture=res + date;
+        this.products[indexOfStevie].price=Number(price);
+        // document.getElementById("picture"+indexOfStevie)?.setAttribute("src",`http://localhost:8080/getimage/${res}?timestamp=`+ new Date().getTime());
       });
-
   }
   deleteProduct(id:number) {
     this.products=this.products.filter(e=>e.id!=id);
