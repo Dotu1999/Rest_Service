@@ -32,8 +32,8 @@ export class OrderComponent implements OnInit {
   getOrderDetail(id:number){
     this.OrderService.getOrderDetail(id).subscribe(
       data => {
+        this.sum =0;
         this.items = data.lineItems;
-        console.log(this.items);
         this.items.forEach(e=>{
           this.sum += e.product.price*e.quantity;
         })

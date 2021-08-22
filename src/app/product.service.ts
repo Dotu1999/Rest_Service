@@ -31,9 +31,9 @@ export class ProductService {
     );
   }
   public updateProduct(id:String,data:FormData): Observable<any> {
-    // const product2 :Product = new Product();
-    // const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.put(this.baseURL + `products/${id}`,data,{responseType: 'text'});
+    return this.http.put(this.baseURL + `products/${id}`,data,{responseType: 'text'}).pipe(
+      tap(selectedProduct=>console.log(`selectedProduct=${JSON.stringify(selectedProduct)}`))
+    );
   }
   public deleteProduct(id:number): Observable<any> {
     return this.http.delete<any>(this.baseURL+`products/${id}`);

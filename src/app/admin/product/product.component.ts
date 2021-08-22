@@ -64,7 +64,6 @@ export class ProductComponent implements OnInit {
     {
       formData.append('image', this.fileToUpload);
     }
-    // formData.append('image', this.fileToUpload);
     this.ProductService.updateProduct(id,formData).subscribe(res=>
       {
         let idProduct:number = Number(id);

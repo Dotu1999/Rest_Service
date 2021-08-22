@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrderComponent } from './order/order.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { AdminModule } from './admin/admin.module';
+import { authInterceptorProviders } from './auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,7 @@ import { AdminModule } from './admin/admin.module';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
