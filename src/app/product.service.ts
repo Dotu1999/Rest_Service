@@ -10,7 +10,7 @@ import { Product } from './model/Product';
 export class ProductService {
   public ProductDataSource$ = new BehaviorSubject<Array<any>>([]);
   // baseURL: string = 'https://60efed10f587af00179d3b82.mockapi.io/api/';
-  baseURL:string = "http://localhost:8080/";
+  baseURL:string = "http://localhost:8080/api/";
   constructor(private http: HttpClient) {}
   public getProduc(): Observable<any> {
     return this.http.get(this.baseURL + 'products').pipe(
@@ -37,5 +37,9 @@ export class ProductService {
   }
   public deleteProduct(id:number): Observable<any> {
     return this.http.delete<any>(this.baseURL+`products/${id}`);
+  }
+  //phân trang
+  getAll(params: any): Observable<any> {
+    return this.http.get<any>(this.baseURL+"productPage", { params });
   }
 }

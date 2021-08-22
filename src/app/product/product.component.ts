@@ -51,5 +51,45 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+  //phân trang
+  title = '';
+  page = 1;
+  count=0;
+  pageSize = 6;
+  getRequestParams(searchTitle: string, page: number, pageSize: number): any {
+    let params: any = {};
 
+    if (searchTitle) {
+      params[`title`] = searchTitle;
+    }
+    if (page) {
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
+  retrieveTutorials(): void {
+    const params = this.getRequestParams(this.title, this.page, this.pageSize);
+    this.ProductService.getAll(params)
+    .subscribe(
+      response => {
+        const { tutorials, totalItems } = response;
+        this.products = tutorials;
+        this.count = totalItems;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+  searchTitle(): void {
+    this.page = 1;
+    this.retrieveTutorials();
+  }
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.retrieveTutorials();
+  }
 }

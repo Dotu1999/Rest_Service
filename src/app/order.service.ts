@@ -8,7 +8,7 @@ import { Order } from './model/Order';
   providedIn: 'root'
 })
 export class OrderService {
-  baseURL:string = "http://localhost:8080/";
+  baseURL:string = "http://localhost:8080/api/";
   constructor(private http: HttpClient) { }
   public getOrder(): Observable<any> {
     return this.http.get(this.baseURL + 'orders');

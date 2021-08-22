@@ -1,5 +1,27 @@
 <button id="add" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary"
 (click)="setStatus(0);name.value='';picture.value='';fileToUpload=null">Thêm Sản Phẩm</button>
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by title"
+          [(ngModel)]="title"
+          (change)="searchTitle()"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchTitle()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
 <div></div>
 <table class="table table-bordered">
     <thead>
@@ -13,10 +35,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products ; let i = index">
+        <tr *ngFor="let product of products | paginate : {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+          }; let i = index">
             <td>{{i}}</td>
             <td>
-                <img id="picture{{i}}" src="http://localhost:8080/getimage/{{products[i].picture}}"
+                <img id="picture{{i}}" src="http://localhost:8080/api/getimage/{{products[i].picture}}"
                     alt="ảnh hoa quả">
             </td>
             <td>{{products[i].name}}</td>
@@ -28,6 +54,12 @@
         </tr>
     </tbody>
 </table>
+<pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      [responsive]="true"
+      (pageChange)="handlePageChange($event)"
+    ></pagination-controls>
 <!-- The Modal -->
 <!-- <form> -->
 <div class="modal fade" id="myModal">

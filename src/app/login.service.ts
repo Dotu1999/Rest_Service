@@ -13,7 +13,7 @@ export class LoginService {
     baseURL: string ;
 
     constructor(private http: HttpClient) {
-        this.baseURL = 'http://localhost:8080/';
+        this.baseURL = 'http://localhost:8080/api/';
     }
 
     login(user: string, pass: string): Observable<boolean> {

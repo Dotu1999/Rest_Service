@@ -11,6 +11,7 @@ import { OrderComponent } from './order/order.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { AdminModule } from './admin/admin.module';
 import { authInterceptorProviders } from './auth.interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { authInterceptorProviders } from './auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [ProductService,authInterceptorProviders],
   bootstrap: [AppComponent]
