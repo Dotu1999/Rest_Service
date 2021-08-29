@@ -9,12 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '../app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NewspaperComponent } from './newspaper/newspaper.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 @NgModule({
   declarations: [
     ProductComponent,
     OrderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    NewspaperComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CKEditorModule
   ],
   exports: [OrderComponent]
 })

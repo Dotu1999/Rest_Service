@@ -12,6 +12,9 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { AdminModule } from './admin/admin.module';
 import { authInterceptorProviders } from './auth.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CKEditorModule } from 'ckeditor4-angular';
+// import { RouterModule } from '@angular/router';
+// import{appRoutes} from
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CKEditorModule,
+    // RouterModule.forRoot(appRoutes,{useHash:true})
   ],
   providers: [ProductService,authInterceptorProviders],
   bootstrap: [AppComponent]
